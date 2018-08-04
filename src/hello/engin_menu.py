@@ -8,9 +8,10 @@ from helpers.director.engine import BaseEngine,page,fa
 from helpers.maintenance.update_static_timestamp import js_stamp
 
 class PcMenu(BaseEngine):
-    url_name='zhujiajiao'
-    brand='朱家角管理平台'
-    mini_brand='ZJJ'
+    url_name='chonggu'
+    brand='重固管理平台'
+    title ='重固'
+    mini_brand='CG'
     menu=[
         {'label':'监督员','url':page('inspector.inspector'),'icon':fa('fa-user-secret'),
          'submenu':[
@@ -18,7 +19,7 @@ class PcMenu(BaseEngine):
              {'label':'监督员列表','url':page('inspector.inspector')},
              {'label':'监督员分组','url':page('inspector.inspectorgroup')}, 
              {'label':'监督员排班','url':page('dianzi_weilan.workinspector')}, 
-             #{'label':'监督员统计','url':page('keeper.caseStatic')}, 
+             {'label':'监督员统计','url':page('keeper.caseStatic')}, 
              ]},
 
         {'label':'案件对比','url':page('case_cmp.duchacase'),'icon':fa('fa-search')},

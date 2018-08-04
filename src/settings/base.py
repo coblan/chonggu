@@ -154,6 +154,17 @@ MEDIA_ROOT= os.path.join( os.path.dirname(BASE_DIR),'media')
 MEDIA_URL = '/media/'
 
 
-STREET_CODE = 1803  # 重固 1809
-XUNCHA_CODE = 6
-DEPTCODE = 20701
+STREET_CODE = 1809  # 重固 1809
+XUNCHA_CODE = 11
+#3	夏阳街道
+#5	盈浦街道
+#6	朱家角
+#7	练塘
+#8	金泽
+#9	香花桥
+#10	白鹤
+#11	重固
+#12	华新
+#13	徐泾
+#14	赵巷
+DEPTCODE = 21101 
