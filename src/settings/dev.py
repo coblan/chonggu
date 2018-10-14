@@ -18,6 +18,7 @@ DATA_PROXY ={
 
 
 XUNCHA_HOST = "http://localhost:8001"
+XUNCHA_HOST = 'http://10.231.18.23:8199'
 
 #SANGO_BRIDGE='http://7.207.150.71:8000'
 SANGO_BRIDGE='http://12.110.185.17:8499'
