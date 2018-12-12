@@ -6301,7 +6301,7 @@ var ele_operations = {
 
     //                      :disabled="get_attr(op.disabled)"
     //v-show="! get_attr(op.hide)"
-    template: '<div class="oprations" style="padding: 5px;">\n                <component v-for="op in ops"\n                           :is="op.editor"\n                           :ref="\'op_\'+op.name"\n                           :head="op"\n                           :disabled="eval(op.disabled)"\n                           v-show="is_show(op)"\n                           @operation="on_operation(op)"></component>\n            </div>',
+    template: '<div class="oprations" style="padding: 5px;">\n                <component v-for="op in ops"\n                           :is="op.editor"\n                           :ref="\'op_\'+op.name"\n                           :head="op"\n                           :disabled="is_disable(op)"\n                           v-show="is_show(op)"\n                           @operation="on_operation(op)"></component>\n            </div>',
     data: function data() {
         var self = this;
         this.parStore = ex.vueParStore(this);
@@ -6311,6 +6311,13 @@ var ele_operations = {
     },
 
     methods: {
+        is_disable: function is_disable(op) {
+            if (op.disabled == undefined) {
+                return false;
+            } else {
+                return ex.eval(op.disabled, { ts: this.parStore });
+            }
+        },
         is_show: function is_show(op) {
             count += 1;
             console.log(count);
