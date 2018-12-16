@@ -1,0 +1,49 @@
+//body{
+//  background-color: #00001d;
+//  color: white;
+//}
+
+.main-panel{
+  font-family:STHeiti;
+  background: #00001d;
+  color: #668393;
+    width: 1500px;
+    height: 900px;
+    position: relative;
+
+  .big-head{
+      font-size: 28px;
+      letter-spacing:6px;
+      color: #668393;
+      font-weight: 500;
+      padding-left: 100px;
+      height: 100px;
+  }
+  .col{
+      display: inline-block;
+      width: 480px;
+  }
+  .op-panel{
+    background-color: rgba(223, 220, 215, 0.05);
+    margin: 30px 10px;
+    border-left: 1px solid rgba(44, 52, 89, 0.83);
+  }
+  .scien-text{
+    font-weight: 600;
+    &:hover{
+      color: #83a7b7;
+    }
+  }
+  .head1{
+    font-style: italic;
+    font-size: 20px;
+
+  }
+  .head2{
+    font-style: italic;
+    font-size: 16px;
+    border-left: 2px solid rgb(114, 209, 219);
+    margin-left: 12px;
+    padding: 6px 16px;
+  }
+}

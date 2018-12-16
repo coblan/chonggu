@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'helpers.director',
     'helpers.case.jb_admin',
     'helpers.authuser',
-    
+    'helpers.case.site_frame',
     'hello',
     'shanghai_grid.geoscope',
     'shanghai_grid.geoinfo',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'shanghai_grid.key_region',
     'shanghai_grid.dianzi_weilan',
     'shanghai_grid.case_cmp',
+    'bigscreen'
 ]
 
 MIDDLEWARE_CLASSES = [

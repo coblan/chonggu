@@ -31,8 +31,8 @@ class PcMenu(BaseEngine):
                     ]},           
         {'label':'重点区域','icon':fa('fa-key'),
              'submenu':[
-                 {'label':'重点巡查区域','url':page('key_region.forcast')},
-                 {'label':'重点案件统计','url':page('keyregion.caseStatistic')},
+                 {'label':'巡查区域预测','url':page('key_region.forcast')},
+                 {'label':'区域案件统计','url':page('keyregion.caseStatistic')},
                  
                  ]},
 

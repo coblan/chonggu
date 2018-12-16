@@ -1,0 +1,54 @@
+{% extends 'site_frame/base.html' %}
+{% load static %}
+{% load jsonify %}
+
+{% block custom_meta %}
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+{% endblock %}
+
+{% block site-head %}
+<title>重固大屏</title>
+{% endblock %}
+
+
+{% block site-content %}
+
+<script src="{{ js_config.js_lib.element }}"></script>
+<link href="{{ js_config.js_lib.element_css }}" rel="stylesheet">
+<script src="{{ js_config.js_lib.director }}"></script>
+<script src="{{ js_config.js_lib.jb_admin_pack_js }}"></script>
+<script src="{{ js_config.js_lib.welljia }}"></script>
+<script src="{{ js_config.js_lib.bigscreen }}"></script>
+
+<script>
+
+
+    $(function(){
+
+        new Vue({
+            el:'#main-panel'
+        })
+
+    })
+
+
+</script>
+
+<div class="main-panel" id="main-panel">
+
+    <div class="big-head">
+        重固镇城市网格化管理中心
+    </div>
+    <div class="col">
+        <div class="scien-text head1">
+            12345
+        </div>
+        <com-banli-status class="op-panel"></com-banli-status>
+        <com-chuzhi class="op-panel"></com-chuzhi>
+    </div>
+
+
+</div>
+
+
+{% endblock %}
