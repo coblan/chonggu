@@ -3861,8 +3861,28 @@ var com_date_datetimefield_range = {
             end: end
         };
     },
-    template: '<div  class="com-date-range-filter date-filter flex flex-ac">\n                     <date v-model="start" :placeholder="head.label"></date>\n                    <div style="display: inline-block;margin: 0 2px;" >-</div>\n                        <date  v-model="end" :placeholder="head.label"></date>\n                </div>',
-
+    template: '<div  class="com-date-range-filter date-filter flex flex-ac">\n                     <!--<date v-model="start" :placeholder="head.label"></date>-->\n                     <span v-text="head.label" style="white-space: nowrap"></span>:\n                        <input class="start form-control input-sm " v-model="start" readonly\n                        style="background-color: white"\n                        placeholder="\u5F00\u59CB\u65E5\u671F">\n                    <div style="display: inline-block;margin: 0 2px;" >-</div>\n                        <!--<date  v-model="end" :placeholder="head.label"></date>-->\n                        <input class="end form-control input-sm"  v-model="end"  readonly\n                         style="background-color: white"\n                         placeholder="\u7ED3\u675F\u65E5\u671F">\n                </div>',
+    mounted: function mounted() {
+        var self = this;
+        ex.load_js('/static/lib/laydate/laydate.js', function () {
+            laydate.render({
+                elem: $(self.$el).find('.start')[0],
+                type: 'date',
+                done: function done(value, date, endDate) {
+                    //self.search_args['_start_'+self.head.name]=value
+                    self.start = value;
+                }
+            });
+            laydate.render({
+                elem: $(self.$el).find('.end')[0],
+                type: 'date',
+                done: function done(value, date, endDate) {
+                    //self.search_args['_end_'+self.head.name]=value
+                    self.end = value;
+                }
+            });
+        });
+    },
     watch: {
         start: function start(nv, ov) {
             if (nv && this.end) {
@@ -3914,15 +3934,15 @@ Vue.component('com-date-datetimefield-range-filter', com_date_datetimefield_rang
 var com_datetime_range = {
     props: ['head', 'search_args'],
     data: function data() {
-        if (!this.search_args['_start_' + this.head.name]) {
-            Vue.set(this.search_args, '_start_' + this.head.name, '');
-        }
-        if (!this.search_args['_end_' + this.head.name]) {
-            Vue.set(this.search_args, '_end_' + this.head.name, '');
-        }
-        return {};
+
+        var start = this.search_args['_start_' + this.head.name];
+        var end = this.search_args['_end_' + this.head.name];
+        return {
+            start: start,
+            end: end
+        };
     },
-    template: '<div  class="com-filter-datetime-range flex flex-ac">\n                    <input class="start form-control input-sm " v-model="search_args[\'_start_\'+head.name]" readonly\n                        style="background-color: white"\n                        :placeholder="head.label">\n                    <div style="display: inline-block;margin: 0 2px;" >-</div>\n                    <input class="end form-control input-sm"  v-model="search_args[\'_end_\'+head.name]"  readonly\n                     style="background-color: white"\n                     :placeholder="head.label">\n                </div>',
+    template: '<div  class="com-filter-datetime-range flex flex-ac">\n                <span v-text="head.label" style="white-space: nowrap"></span>:\n                    <input class="start form-control input-sm " v-model="start" readonly\n                        style="background-color: white;width: 12em"\n                        placeholder="\u5F00\u59CB\u65F6\u95F4">\n                    <div style="display: inline-block;margin: 0 2px;" >-</div>\n                    <input class="end form-control input-sm"  v-model="end"  readonly\n                     style="background-color: white;width: 12em"\n                     placeholder="\u7ED3\u675F\u65F6\u95F4">\n                </div>',
     //template:`<div  class="com-filter-datetime flex flex-ac">
     //                <input type="text" class="form-control input-sm" style="width: 23em" readonly
     //                    :placeholder="head.placeholder">
@@ -3934,7 +3954,8 @@ var com_datetime_range = {
                 elem: $(self.$el).find('.start')[0],
                 type: 'datetime',
                 done: function done(value, date, endDate) {
-                    self.search_args['_start_' + self.head.name] = value;
+                    //self.search_args['_start_'+self.head.name]=value
+                    self.start = value;
                     //console.log(value); //得到日期生成的值，如：2017-08-18
                     //console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
                     //console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
@@ -3944,13 +3965,41 @@ var com_datetime_range = {
                 elem: $(self.$el).find('.end')[0],
                 type: 'datetime',
                 done: function done(value, date, endDate) {
-                    self.search_args['_end_' + self.head.name] = value;
+                    self.end = value;
                     //console.log(value); //得到日期生成的值，如：2017-08-18
                     //console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
                     //console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
                 }
             });
         });
+    },
+    watch: {
+        start: function start(nv, ov) {
+            if (nv && this.end) {
+                if (nv > this.end) {
+                    cfg.showError('开始时间必须小于结束时间');
+                    var self = this;
+                    Vue.nextTick(function () {
+                        self.start = ov;
+                    });
+                    return;
+                }
+            }
+            Vue.set(this.search_args, '_start_' + this.head.name, nv);
+        },
+        end: function end(nv, ov) {
+            if (nv && this.start) {
+                if (nv < this.start) {
+                    cfg.showError('结束时间必须大于开始时间');
+                    var self = this;
+                    Vue.nextTick(function () {
+                        self.end = ov;
+                    });
+                    return;
+                }
+            }
+            Vue.set(this.search_args, '_end_' + this.head.name, nv);
+        }
     }
 
 };
