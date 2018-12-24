@@ -1268,7 +1268,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".com-grid-banli .icontent {\n  margin: 20px 30px 0 60px;\n  display: inline-block;\n  vertical-align: top; }\n\n.com-grid-banli .amount-info .number {\n  color: orange;\n  font-size: 20px;\n  display: inline-block;\n  margin-left: 40px; }\n\n.com-grid-banli .ratio {\n  text-align: center;\n  display: inline-block;\n  margin: 0 10px; }\n  .com-grid-banli .ratio .number {\n    color: #00ad9c;\n    font-size: 20px; }\n", ""]);
+exports.push([module.i, ".com-grid-banli .icontent {\n  margin: 20px 30px 0 40px;\n  display: inline-block;\n  vertical-align: top; }\n\n.com-grid-banli .amount-info .number {\n  color: orange;\n  font-size: 20px;\n  display: inline-block;\n  margin-left: 30px; }\n\n.com-grid-banli .ratio {\n  text-align: center;\n  display: inline-block;\n  margin: 0 10px; }\n  .com-grid-banli .ratio .number {\n    color: #00ad9c;\n    font-size: 20px; }\n", ""]);
 
 // exports
 
