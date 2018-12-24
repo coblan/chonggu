@@ -102,7 +102,7 @@ WHERE
 	AND InfoSourceid =10 
 	AND STREETCODE IN ( '1809' ) 
     """
-    rows = exec_sql(sql,small_key=False)
+    rows = sango_exec_sql(sql,small_key=False)
     row=rows[0]
     first_contact_ratio = row.get('FIRST_YES')/(row.get('FIRST_YES')+row.get('FIRST_NO') )
     real_solve=row.get('REAL_SOLVE')
@@ -172,7 +172,7 @@ WHERE
 	AND InfoSourceid IN ( 1, 36, 61, 9 ) 
 	AND STREETCODE IN ( '1809' ) 
     """
-    rows = exec_sql(sql)
+    rows = sango_exec_sql(sql)
     
     return rows[0]     
     
