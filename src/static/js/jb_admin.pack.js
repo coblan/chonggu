@@ -436,7 +436,7 @@ var com_sim_fields = exports.com_sim_fields = {
     },
     computed: {
         small_srn: function small_srn() {
-            return env.width < 760;
+            return this.env.width < 760;
         },
         normed_heads: function normed_heads() {
             return this.heads;
@@ -3376,21 +3376,19 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+//var table_store={
+//    namespace:true,
+//    state(){
+//        return {
+//            childbus:new Vue(),
+//        }
+//    },
+//    mutations:{
+//    }
+//}
 
+//window.table_store = table_store
 
-var table_store = {
-    namespace: true,
-    state: function state() {
-        return {
-            childbus: new Vue()
-        };
-    },
-
-    mutations: {}
-
-    //window.table_store = table_store
-
-};
 
 /***/ }),
 /* 45 */
@@ -5431,6 +5429,7 @@ var table_page_store = {
     },
     created: function created() {
         var self = this;
+        // 这个不用了，转到 table_store 里面去了
         ex.each(this.childStore_event_slot, function (router) {
             self.$on(router.event, function (e) {
                 var kws = ex.eval(router.kws, e);
@@ -5511,10 +5510,19 @@ var table_store = {
             ops: [],
             crt_row: {},
             selectable: true,
-            changed_rows: []
+            changed_rows: [],
+            event_slots: []
         };
     },
     mixins: [mix_ele_table_adapter],
+    created: function created() {
+        var self = this;
+        ex.each(this.event_slots, function (router) {
+            self.$on(router.event, function (e) {
+                ex.eval(router.express, { event: e, ts: self });
+            });
+        });
+    },
     computed: {
         changed: function changed() {
             return this.changed_rows.length != 0;
@@ -5732,7 +5740,7 @@ var table_store = {
                     var win_index = pop_edit_local(one_row, kws.fields_ctx, function (new_row, store) {
                         bb(new_row, function (resp) {
                             if (resp.save_rows.errors) {
-                                store.showError(resp.save_rows.errors);
+                                cfg.showError(JSON.stringify(resp.save_rows.errors));
                                 //self.$store.commit(store_id+'/showErrors',resp.save_rows.errors)
                             } else {
                                 layer.close(win_index);
@@ -5937,24 +5945,37 @@ var row_match = {
             }
         }
     },
+    // 这个函数被 many_row 替代了。 只需要加上 match_express 就可以替换这个函数
     many_row_match: function many_row_match(self, head) {
         // head : @match_field , @match_values ,@match_msg
         if (self.selected.length == 0) {
             cfg.showMsg('请至少选择一行数据！');
             return false;
         } else {
-            var field = head.match_field;
-            var values = head.match_values;
-            var msg = head.match_msg;
+            if (head.match_field) {
+                // 老的用法，准备剔除  ,现在全部改用 match_express
+                var field = head.match_field;
+                var values = head.match_values;
+                var msg = head.match_msg;
 
-            for (var i = 0; i < self.selected.length; i++) {
-                var row = self.selected[i];
-                if (!ex.isin(row[field], values)) {
-                    cfg.showMsg(msg);
-                    return false;
+                for (var i = 0; i < self.selected.length; i++) {
+                    var row = self.selected[i];
+                    if (!ex.isin(row[field], values)) {
+                        cfg.showMsg(msg);
+                        return false;
+                    }
                 }
+                return true;
+            } else {
+                for (var i = 0; i < self.selected.length; i++) {
+                    var row = self.selected[i];
+                    if (!ex.eval(head.match_express)) {
+                        cfg.showMsg(head.match_msg);
+                        return false;
+                    }
+                }
+                return true;
             }
-            return true;
         }
     }
 };
@@ -6089,14 +6110,20 @@ Vue.component('com-panel-pop-fields', com_pop_fields_panel);
 
 var table_panel = {
     props: ['ctx'],
+
     data: function data() {
         var self = this;
         if (this.ctx.selectable == undefined) {
             this.ctx.selectable = true;
         }
-        var this_table_store = {
+        var base_table_panel_store = {
+            props: ['ctx'],
+            propsData: {
+                ctx: self.ctx
+            },
             data: function data() {
                 return {
+                    par_row: self.ctx.par_row || {},
                     heads: self.ctx.heads || [],
                     selectable: self.ctx.selectable,
                     search_args: self.ctx.search_args || {},
@@ -6111,26 +6138,32 @@ var table_panel = {
                 };
             },
             mixins: [table_store]
-
         };
+        var this_table_store = this.get_custom_store(base_table_panel_store);
+        //var this_table_store =  {
+        //    mixins:[table_store,base_table_store].concat(custom_store)
+        //}
         return {
             childStore: new Vue(this_table_store),
             par_row: this.ctx.par_row || {},
-
             del_info: []
         };
     },
     mixins: [mix_table_data, mix_ele_table_adapter],
+
     mounted: function mounted() {
         this.childStore.$on('finish', this.emit_finish);
         this.childStore.search();
     },
     methods: {
+        get_custom_store: function get_custom_store() {
+            return [];
+        },
         emit_finish: function emit_finish(event) {
             this.$emit('finish', event);
         }
     },
-    template: '<div class="com-table-panel" style="height: 100%;padding-left: 10px">\n\n            <div class="rows-block flex-v" style="height: 100%">\n\n\n              <div v-if="childStore.row_filters.length > 0" style="background-color: #fbfbf8;padding: 8px 1em;border-radius: 4px;margin-top: 8px">\n\n                     <com-table-filters></com-table-filters>\n\n               </div>\n\n               <div  v-if="childStore.ops.length>0 && childStore.tab_stack.length ==0">\n                        <com-table-operations></com-table-operations>\n               </div>\n\n                <div class="box box-success flex-v flex-grow" style="margin-bottom: 0">\n                    <div class="table-wraper flex-grow" style="position: relative;">\n\n                        <com-table-grid></com-table-grid>\n                    </div>\n                </div>\n            <div style="background-color: white;">\n                <com-table-pagination></com-table-pagination>\n            </div>\n\n        </div>\n    </div>'
+    template: '<div class="com-table-panel" style="height: 100%;">\n\n            <div class="rows-block flex-v" style="height: 100%">\n\n\n              <div v-if="childStore.row_filters.length > 0" style="background-color: #fbfbf8;padding: 8px 1em;border-radius: 4px;margin-top: 8px">\n\n                     <com-table-filters></com-table-filters>\n\n               </div>\n\n               <div  v-if="childStore.ops.length>0 && childStore.tab_stack.length ==0">\n                        <com-table-operations></com-table-operations>\n               </div>\n\n                <div class="box box-success flex-v flex-grow" style="margin-bottom: 0">\n                    <div class="table-wraper flex-grow" style="position: relative;">\n\n                        <com-table-grid></com-table-grid>\n                    </div>\n                </div>\n            <div style="background-color: white;">\n                <com-table-pagination></com-table-pagination>\n            </div>\n\n        </div>\n    </div>'
 };
 
 window.com_table_panel = table_panel;
@@ -6301,7 +6334,7 @@ var ele_operations = {
 
     //                      :disabled="get_attr(op.disabled)"
     //v-show="! get_attr(op.hide)"
-    template: '<div class="oprations" style="padding: 5px;">\n                <component v-for="op in ops"\n                           :is="op.editor"\n                           :ref="\'op_\'+op.name"\n                           :head="op"\n                           :disabled="is_disable(op)"\n                           v-show="is_show(op)"\n                           @operation="on_operation(op)"></component>\n            </div>',
+    template: '<div class="oprations" style="padding: 5px;">\n                <component v-for="(op,index) in ops"\n                           :is="op.editor"\n                           :ref="\'op_\'+op.name"\n                           :head="op"\n                           :key="index"\n                           :disabled="is_disable(op)"\n                           v-show="is_show(op)"\n                           @operation="on_operation(op)"></component>\n            </div>',
     data: function data() {
         var self = this;
         this.parStore = ex.vueParStore(this);
@@ -6396,7 +6429,13 @@ var table_parents = {
             parStore: ex.vueParStore(self)
         };
     },
-    template: '<div class="com-table-parents">\n          <ol v-if="parStore.parents.length>0" class="breadcrumb jb-table-parent">\n            <li v-for="par in parStore.parents"><a href="#" @click="parStore.get_childs(par.value)"  v-text="par.label"></a></li>\n        </ol>\n    </div>'
+    template: '<div class="com-table-parents">\n          <ol v-if="parStore.parents.length>0" class="breadcrumb jb-table-parent">\n            <li v-for="par in parStore.parents"><a href="#" @click="on_click(par)"  v-text="par.label"></a></li>\n        </ol>\n    </div>',
+    methods: {
+        on_click: function on_click(par) {
+            this.parStore.$emit('parent_changed', par);
+            this.parStore.get_childs(par.value);
+        }
+    }
 };
 Vue.component('com-table-parents', table_parents);
 

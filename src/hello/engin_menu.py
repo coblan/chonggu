@@ -59,6 +59,7 @@ class ProgramerMenu(BaseEngine):
         {'label':'区域编辑','url':page('geoscope.blockgroup'),'icon':fa('fa-map-o')},
  
         {'label':'参数设置','url':page('kv'),'icon':fa('fa-map-o')},
+        {'label':'主页设置','url':page('bigscreen.setting'),'icon':fa('fa-map-o')}
         
         
     ]  

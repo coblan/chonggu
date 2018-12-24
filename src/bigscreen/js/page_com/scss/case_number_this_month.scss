@@ -1,0 +1,16 @@
+.com-case-number-this-month{
+
+    table{
+        display: inline-block;
+        margin: 20px;
+    }
+
+    td,th{
+      text-align: center;
+      color: green;
+      padding: 3px;
+    }
+  th{
+    border-bottom: 1px dashed green;
+  }
+}

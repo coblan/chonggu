@@ -5,21 +5,32 @@
 
 .main-panel{
   font-family:STHeiti;
-  background: #00001d;
+  //background: #00001d;
+  background: url("/static/bigscreen/bg.png");
+  background-size:100% 100%;
   color: #668393;
+
     width: 1500px;
     height: 900px;
     position: relative;
 
   .big-head{
-      font-size: 28px;
+      padding-top: 5px;
+      font-size: 30px;
       letter-spacing:6px;
       color: #668393;
       font-weight: 500;
       padding-left: 100px;
       height: 100px;
   }
+
+  //.grid-items{
+  //
+  //
+  //}
+
   .col{
+      vertical-align: top;
       display: inline-block;
       width: 480px;
   }

@@ -1,0 +1,19 @@
+.com-gaofa-case{
+    table{
+      margin: 24px;
+    }
+    td,th{
+      text-align: center;
+      padding: 3px;
+    }
+    td{
+      color: white;
+    }
+    td:first-child{
+      color: #668393;
+    }
+    th{
+        color: #668393;
+        border-bottom: 1px solid #668393;
+    }
+}
