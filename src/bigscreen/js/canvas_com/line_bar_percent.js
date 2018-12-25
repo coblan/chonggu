@@ -11,6 +11,13 @@ Vue.component('com-can-line-bar-percent',{
         //ctx.arc(100,75,50,0,2*Math.PI);
         //ctx.stroke();
         toCanvas(canvas,this.percent,this.color,this.title)
+    },
+    watch:{
+        percent:function(){
+            var canvas = $(this.$el).find('canvas')[0];
+            toCanvas(canvas,this.percent,this.color,this.title)
+        }
+
     }
 })
 

@@ -5,15 +5,15 @@ Vue.component('com-grid-banli',{
         return {
             amount_heads:[
                 {name:'shouli_number',label:'受理数'},
-                {name:'on_handle',label:'在办数'},
                 {name:'handle_over',label:'结案数'},
+                {name:'at_time_handle',label:'及时结案数'},
             ],
             row:{
                 shouli_number:0,
-                on_handle:0,
                 handle_over:0,
-                over_ratio:0,
-                at_time_over_ratio:0,
+                at_time_handle:0,
+                handle_over_ratio:0,
+                at_time_handel_ratio:0,
             },
 
         }
@@ -28,15 +28,15 @@ Vue.component('com-grid-banli',{
         </div>
         <div class="icontent">
             <div class="ratio">
-                <com-can-line-bar-percent :percent="row.over_ratio" color="red"></com-can-line-bar-percent>
+                <com-can-line-bar-percent :percent="row.handle_over_ratio" color="red"></com-can-line-bar-percent>
                 <br><span>结案率</span><br>
-                <span class="number"><span v-text="row.over_ratio"></span>%</span>
+                <span class="number"><span v-text="row.handle_over_ratio"></span>%</span>
             </div>
 
             <div class="ratio">
-                <com-can-line-bar-percent :percent="row.at_time_over_ratio" color="red"></com-can-line-bar-percent>
+                <com-can-line-bar-percent :percent="row.at_time_handel_ratio" color="green"></com-can-line-bar-percent>
                 <br><span>及时结案率</span><br>
-                <span class="number"><span v-text="row.at_time_over_ratio"></span>%</span>
+                <span class="number"><span v-text="row.at_time_handel_ratio"></span>%</span>
             </div>
 
         </div>
