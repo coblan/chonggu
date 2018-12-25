@@ -811,6 +811,13 @@ Vue.component('com-can-line-bar-percent', {
         //ctx.arc(100,75,50,0,2*Math.PI);
         //ctx.stroke();
         toCanvas(canvas, this.percent, this.color, this.title);
+    },
+    watch: {
+        percent: function percent() {
+            var canvas = $(this.$el).find('canvas')[0];
+            toCanvas(canvas, this.percent, this.color, this.title);
+        }
+
     }
 });
 
@@ -1087,18 +1094,18 @@ __webpack_require__(26);
 Vue.component('com-grid-banli', {
     data: function data() {
         return {
-            amount_heads: [{ name: 'shouli_number', label: '受理数' }, { name: 'on_handle', label: '在办数' }, { name: 'handle_over', label: '结案数' }],
+            amount_heads: [{ name: 'shouli_number', label: '受理数' }, { name: 'handle_over', label: '结案数' }, { name: 'at_time_handle', label: '及时结案数' }],
             row: {
                 shouli_number: 0,
-                on_handle: 0,
                 handle_over: 0,
-                over_ratio: 0,
-                at_time_over_ratio: 0
+                at_time_handle: 0,
+                handle_over_ratio: 0,
+                at_time_handel_ratio: 0
             }
 
         };
     },
-    template: '<div class="com-grid-banli">\n        <div class="scien-text head2">\u529E\u7406\u60C5\u51B5</div>\n        <div class="icontent">\n             <div class="amount-info" v-for="head in amount_heads">\n                  <span class="head-label" v-text="head.label"></span>\n                  <span class="number" v-text="row[head.name]"></span>\n             </div>\n        </div>\n        <div class="icontent">\n            <div class="ratio">\n                <com-can-line-bar-percent :percent="row.over_ratio" color="red"></com-can-line-bar-percent>\n                <br><span>\u7ED3\u6848\u7387</span><br>\n                <span class="number"><span v-text="row.over_ratio"></span>%</span>\n            </div>\n\n            <div class="ratio">\n                <com-can-line-bar-percent :percent="row.at_time_over_ratio" color="red"></com-can-line-bar-percent>\n                <br><span>\u53CA\u65F6\u7ED3\u6848\u7387</span><br>\n                <span class="number"><span v-text="row.at_time_over_ratio"></span>%</span>\n            </div>\n\n        </div>\n\n    </div>',
+    template: '<div class="com-grid-banli">\n        <div class="scien-text head2">\u529E\u7406\u60C5\u51B5</div>\n        <div class="icontent">\n             <div class="amount-info" v-for="head in amount_heads">\n                  <span class="head-label" v-text="head.label"></span>\n                  <span class="number" v-text="row[head.name]"></span>\n             </div>\n        </div>\n        <div class="icontent">\n            <div class="ratio">\n                <com-can-line-bar-percent :percent="row.handle_over_ratio" color="red"></com-can-line-bar-percent>\n                <br><span>\u7ED3\u6848\u7387</span><br>\n                <span class="number"><span v-text="row.handle_over_ratio"></span>%</span>\n            </div>\n\n            <div class="ratio">\n                <com-can-line-bar-percent :percent="row.at_time_handel_ratio" color="green"></com-can-line-bar-percent>\n                <br><span>\u53CA\u65F6\u7ED3\u6848\u7387</span><br>\n                <span class="number"><span v-text="row.at_time_handel_ratio"></span>%</span>\n            </div>\n\n        </div>\n\n    </div>',
     mounted: function mounted() {
         var self = this;
         ex.director_call('bigscreen.grid_banli', {}, function (resp) {
@@ -1268,7 +1275,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".com-grid-banli .icontent {\n  margin: 20px 30px 0 40px;\n  display: inline-block;\n  vertical-align: top; }\n\n.com-grid-banli .amount-info .number {\n  color: orange;\n  font-size: 20px;\n  display: inline-block;\n  margin-left: 30px; }\n\n.com-grid-banli .ratio {\n  text-align: center;\n  display: inline-block;\n  margin: 0 10px; }\n  .com-grid-banli .ratio .number {\n    color: #00ad9c;\n    font-size: 20px; }\n", ""]);
+exports.push([module.i, ".com-grid-banli .icontent {\n  margin: 20px 20px 0 40px;\n  display: inline-block;\n  vertical-align: top; }\n\n.com-grid-banli .amount-info .number {\n  color: orange;\n  font-size: 20px;\n  display: inline-block;\n  margin-left: 30px; }\n\n.com-grid-banli .ratio {\n  text-align: center;\n  display: inline-block;\n  margin: 0 10px; }\n  .com-grid-banli .ratio .number {\n    color: #00ad9c;\n    font-size: 20px; }\n", ""]);
 
 // exports
 
