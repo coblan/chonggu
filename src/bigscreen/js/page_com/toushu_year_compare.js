@@ -54,14 +54,16 @@ var toushu_year_compare = {
                     }
                 },
                 series: [{
-                    name:'今年',
-                    data: self.hotline_complain_this ,//[820, 932, 901, 934, 1290, 1330, 1320,1234,1234,1512,213,1255],
-                    type: 'line'
-                },{
                     name:'去年',
                     data: self.hotline_complain_last,//[520, 332, 401, 234, 1290, 1330, 820,834,834,112,213,955],
-                    type: 'line'
+                    type: 'line',
+                    color:'yellow'
                 },
+                    {
+                        name:'今年',
+                        data: self.hotline_complain_this ,//[820, 932, 901, 934, 1290, 1330, 1320,1234,1234,1512,213,1255],
+                        type: 'line',
+                    },
                 ]
             };
 
