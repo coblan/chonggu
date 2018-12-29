@@ -50,7 +50,7 @@ urlpatterns = [
     
     url(r'^d/',include('helpers.director.urls'),name='director'),
     
-    url(r'^$',RedirectView.as_view(url='/pc/inspector.inspector')),
+    url(r'^$',RedirectView.as_view(url='/cg')),
     
     url('^inspector_case/(?P<code>\w+)/?$',inspector_case)
 ]
