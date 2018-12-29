@@ -1,5 +1,5 @@
 Vue.component('com-duty',{
-    template:`<div>
+    template:`<div style="padding-bottom: 20px">
      <div class="scien-text head2">平台值班</div>
      <table style="margin: 10px">
        <tr v-for="head in heads">

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -443,7 +443,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(22);
+var content = __webpack_require__(23);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -845,7 +845,7 @@ function toCanvas(canvas, percent, color) {
 "use strict";
 
 
-__webpack_require__(23);
+__webpack_require__(24);
 
 Vue.component('com-banli-status', {
     data: function data() {
@@ -857,7 +857,7 @@ Vue.component('com-banli-status', {
             }
         };
     },
-    template: '<div class="com-banli-status">\n        <div class="scien-text head2">\u529E\u7406\u60C5\u51B5</div>\n        <div style="padding: 10px 15px;">\n            <div class="item">\n              <div class="scien-text">\u53D7\u7406\u6570</div>\n              <div class="number" v-text="row.shouli_number">22</div>\n            </div>\n\n             <div class="item">\n                  <div class="scien-text">\u5728\u529E\u6570</div>\n                  <div class="number" v-text="row.handling">22</div>\n            </div>\n\n             <div class="item">\n                  <div class="scien-text">\u529E\u7ED3\u6570</div>\n                  <div class="number" v-text="row.handle_over">22</div>\n            </div>\n\n        </div>\n    </div>',
+    template: '<div class="com-banli-status">\n        <div class="scien-text head2">\u529E\u7406\u60C5\u51B5</div>\n        <div style="padding: 40px 30px;">\n            <div class="item">\n              <div class="scien-text">\u53D7\u7406\u6570</div>\n              <div class="number" v-text="row.shouli_number">22</div>\n            </div>\n\n             <div class="item">\n                  <div class="scien-text">\u5728\u529E\u6570</div>\n                  <div class="number" v-text="row.handling">22</div>\n            </div>\n\n             <div class="item">\n                  <div class="scien-text">\u529E\u7ED3\u6570</div>\n                  <div class="number" v-text="row.handle_over">22</div>\n            </div>\n\n        </div>\n    </div>',
     mounted: function mounted() {
         var self = this;
         ex.director_call('12345.banli', {}, function (resp) {
@@ -873,7 +873,7 @@ Vue.component('com-banli-status', {
 "use strict";
 
 
-__webpack_require__(24);
+__webpack_require__(25);
 
 Vue.component('com-case-number-this-month', {
     template: '<div class="com-case-number-this-month">\n     <div class="scien-text head2">\u672C\u6708\u6848\u4EF6\u4E0A\u62A5\u60C5\u51B5</div>\n     <table>\n        <tr>\n            <th style="width: 20px"></th> <th v-for="head in heads" v-text="head.label" :style="{width:head.width}"></th>\n        </tr>\n        <tr v-for="(row,index) in rows1">\n            <td v-text="index+1"></td> <td v-for="head in heads" v-text="row[head.name]"></td>\n        </tr>\n     </table>\n\n         <table>\n            <tr>\n                <th style="width: 20px"></th> <th v-for="head in heads" v-text="head.label" :style="{width:head.width}"></th>\n            </tr>\n            <tr v-for="(row,index) in rows2">\n                <td v-text="index+5"></td> <td v-for="head in heads" v-text="row[head.name]"></td>\n            </tr>\n     </table>\n    </div>',
@@ -917,6 +917,8 @@ Vue.component('com-case-number-this-month', {
 "use strict";
 
 
+__webpack_require__(26);
+
 Vue.component('com-chuzhi', {
     data: function data() {
         return {
@@ -928,7 +930,7 @@ Vue.component('com-chuzhi', {
             }
         };
     },
-    template: '<div>\n    <div class="scien-text head2">\u5904\u7F6E\u7EE9\u6548</div>\n        <com-can-circle-percent :percent="row.first_contact_ratio" color="red" title="\u5148\u884C\u8054\u7CFB\u7387"></com-can-circle-percent>\n        <com-can-circle-percent :percent="row.real_solve_ratio" color="blue" title="\u5E02\u6C11\u6EE1\u610F\u7387"></com-can-circle-percent>\n        <com-can-circle-percent :percent="row.man_yi_ratio" color="yellow" title="\u5B9E\u9645\u89E3\u51B3\u7387"></com-can-circle-percent>\n        <com-can-circle-percent :percent="row.AnShiBanJie_ratio" color="red" title="\u6309\u65F6\u529E\u7ED3\u7387"></com-can-circle-percent>\n    </div>',
+    template: '<div class="com-chuzhi">\n    <div class="scien-text head2">\u5904\u7F6E\u7EE9\u6548</div>\n    <div class="ratio-panel">\n      <com-can-circle-percent :percent="row.first_contact_ratio" color="red" title="\u5148\u884C\u8054\u7CFB\u7387"></com-can-circle-percent>\n        <com-can-circle-percent :percent="row.real_solve_ratio" color="blue" title="\u5E02\u6C11\u6EE1\u610F\u7387"></com-can-circle-percent>\n        <com-can-circle-percent :percent="row.man_yi_ratio" color="yellow" title="\u5B9E\u9645\u89E3\u51B3\u7387"></com-can-circle-percent>\n        <com-can-circle-percent :percent="row.AnShiBanJie_ratio" color="red" title="\u6309\u65F6\u529E\u7ED3\u7387"></com-can-circle-percent>\n\n    </div>\n         </div>',
     mounted: function mounted() {
         var self = this;
         ex.director_call('12345.chuzhi', {}).then(function (resp) {
@@ -945,7 +947,7 @@ Vue.component('com-chuzhi', {
 
 
 Vue.component('com-duty', {
-    template: '<div>\n     <div class="scien-text head2">\u5E73\u53F0\u503C\u73ED</div>\n     <table style="margin: 10px">\n       <tr v-for="head in heads">\n            <td v-text="head.label" style="width: 200px;text-align: right;color: #00a7d0;padding: 8px 20px"></td>\n             <td v-text="row[head.name]"></td>\n        </tr>\n     </table>\n    </div>',
+    template: '<div style="padding-bottom: 20px">\n     <div class="scien-text head2">\u5E73\u53F0\u503C\u73ED</div>\n     <table style="margin: 10px">\n       <tr v-for="head in heads">\n            <td v-text="head.label" style="width: 200px;text-align: right;color: #00a7d0;padding: 8px 20px"></td>\n             <td v-text="row[head.name]"></td>\n        </tr>\n     </table>\n    </div>',
     data: function data() {
         return {
             heads: [{ name: 'yinji_duty', label: '应急值班' }, { name: 'director_duty', label: '网格指挥长' }, { name: 'infoer_duty', label: '信息员' }],
@@ -1059,7 +1061,7 @@ Vue.component('com-faxian-status', function (resolve, reject) {
 "use strict";
 
 
-__webpack_require__(25);
+__webpack_require__(27);
 
 Vue.component('com-gaofa-case', {
     template: '<div class="com-gaofa-case">\n    <div class="scien-text head2">\u9AD8\u53D1\u95EE\u9898</div>\n    <table>\n        <tr>\n            <th v-for="head in heads" v-text="head.label" :style="{width:head.width}"></th>\n        </tr>\n        <tr v-for="row in rows">\n            <td v-for="head in heads" v-text="row[head.name]"></td>\n        </tr>\n    </table>\n    </div>',
@@ -1089,7 +1091,7 @@ Vue.component('com-gaofa-case', {
 "use strict";
 
 
-__webpack_require__(26);
+__webpack_require__(28);
 
 Vue.component('com-grid-banli', {
     data: function data() {
@@ -1202,7 +1204,7 @@ Vue.component('com-toushu-year-compare', function (resolve, reject) {
 "use strict";
 
 
-__webpack_require__(27);
+__webpack_require__(29);
 
 Vue.component('com-weilan-warning', {
     template: '<div class="com-weilan-warning">\n     <div class="scien-text head2">\u56F4\u680F\u544A\u8B66\u60C5\u51B5</div>\n     <div class="item"  v-for="head in heads">\n         <span v-text="row[head.name]" :class="head.name"></span><br>\n         <span v-text="head.label"></span>\n     </div>\n\n    </div>',
@@ -1247,7 +1249,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".com-case-number-this-month table {\n  display: inline-block;\n  margin: 20px; }\n\n.com-case-number-this-month td, .com-case-number-this-month th {\n  text-align: center;\n  color: green;\n  padding: 3px; }\n\n.com-case-number-this-month th {\n  border-bottom: 1px dashed green; }\n", ""]);
+exports.push([module.i, ".com-case-number-this-month table {\n  display: inline-block;\n  margin: 40px 20px; }\n\n.com-case-number-this-month td, .com-case-number-this-month th {\n  text-align: center;\n  color: green;\n  padding: 3px; }\n\n.com-case-number-this-month th {\n  border-bottom: 1px dashed green; }\n", ""]);
 
 // exports
 
@@ -1261,7 +1263,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".com-gaofa-case table {\n  margin: 24px; }\n\n.com-gaofa-case td, .com-gaofa-case th {\n  text-align: center;\n  padding: 3px; }\n\n.com-gaofa-case td {\n  color: white; }\n\n.com-gaofa-case td:first-child {\n  color: #668393; }\n\n.com-gaofa-case th {\n  color: #668393;\n  border-bottom: 1px solid #668393; }\n", ""]);
+exports.push([module.i, ".com-chuzhi .ratio-panel {\n  padding: 50px 20px; }\n", ""]);
 
 // exports
 
@@ -1275,7 +1277,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".com-grid-banli .icontent {\n  margin: 20px 20px 0 40px;\n  display: inline-block;\n  vertical-align: top; }\n\n.com-grid-banli .amount-info .number {\n  color: orange;\n  font-size: 20px;\n  display: inline-block;\n  margin-left: 30px; }\n\n.com-grid-banli .ratio {\n  text-align: center;\n  display: inline-block;\n  margin: 0 10px; }\n  .com-grid-banli .ratio .number {\n    color: #00ad9c;\n    font-size: 20px; }\n", ""]);
+exports.push([module.i, ".com-gaofa-case table {\n  margin: 24px; }\n\n.com-gaofa-case td, .com-gaofa-case th {\n  text-align: center;\n  padding: 3px; }\n\n.com-gaofa-case td {\n  color: white; }\n\n.com-gaofa-case td:first-child {\n  color: #668393; }\n\n.com-gaofa-case th {\n  color: #668393;\n  border-bottom: 1px solid #668393; }\n", ""]);
 
 // exports
 
@@ -1289,7 +1291,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".com-weilan-warning .item {\n  display: inline-block;\n  width: 33%;\n  text-align: center;\n  margin: 20px 0; }\n\n.com-weilan-warning .today_number {\n  color: orange; }\n\n.com-weilan-warning .processed {\n  color: #00ad9c; }\n\n.com-weilan-warning .unprocessed {\n  color: white; }\n", ""]);
+exports.push([module.i, ".com-grid-banli .icontent {\n  margin: 20px 20px 0 40px;\n  display: inline-block;\n  vertical-align: top; }\n\n.com-grid-banli .amount-info .number {\n  color: orange;\n  font-size: 20px;\n  display: inline-block;\n  margin-left: 30px; }\n\n.com-grid-banli .ratio {\n  text-align: center;\n  display: inline-block;\n  margin: 0 10px; }\n  .com-grid-banli .ratio .number {\n    color: #00ad9c;\n    font-size: 20px; }\n", ""]);
 
 // exports
 
@@ -1303,13 +1305,27 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, ".main-panel {\n  font-family: STHeiti;\n  background: url(\"/static/bigscreen/bg.png\");\n  background-size: 100% 100%;\n  color: #668393;\n  width: 1500px;\n  height: 900px;\n  position: relative; }\n  .main-panel .big-head {\n    padding-top: 5px;\n    font-size: 30px;\n    letter-spacing: 6px;\n    color: #668393;\n    font-weight: 500;\n    padding-left: 100px;\n    height: 100px; }\n  .main-panel .col {\n    vertical-align: top;\n    display: inline-block;\n    width: 480px; }\n  .main-panel .op-panel {\n    background-color: rgba(223, 220, 215, 0.05);\n    margin: 30px 10px;\n    border-left: 1px solid rgba(44, 52, 89, 0.83); }\n  .main-panel .scien-text {\n    font-weight: 600; }\n    .main-panel .scien-text:hover {\n      color: #83a7b7; }\n  .main-panel .head1 {\n    font-style: italic;\n    font-size: 20px; }\n  .main-panel .head2 {\n    font-style: italic;\n    font-size: 16px;\n    border-left: 2px solid #72d1db;\n    margin-left: 12px;\n    padding: 6px 16px; }\n", ""]);
+exports.push([module.i, ".com-weilan-warning .item {\n  display: inline-block;\n  width: 33%;\n  text-align: center;\n  margin: 30px 0; }\n\n.com-weilan-warning .today_number {\n  color: orange; }\n\n.com-weilan-warning .processed {\n  color: #00ad9c; }\n\n.com-weilan-warning .unprocessed {\n  color: white; }\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, ".main-panel {\n  font-family: STHeiti;\n  background: url(\"/static/bigscreen/bg.png\");\n  background-size: 100% 100%;\n  color: #668393;\n  width: 1500px;\n  height: 900px;\n  position: relative; }\n  .main-panel .big-head {\n    padding-top: 5px;\n    font-size: 30px;\n    letter-spacing: 6px;\n    color: #668393;\n    font-weight: 500;\n    padding-left: 100px;\n    height: 100px; }\n  .main-panel .col {\n    vertical-align: top;\n    display: inline-block;\n    width: 480px; }\n  .main-panel .op-panel {\n    background-color: rgba(120, 120, 120, 0.05);\n    margin: 30px 10px;\n    border-left: 1px solid rgba(44, 52, 89, 0.83); }\n  .main-panel .scien-text {\n    font-weight: 600; }\n    .main-panel .scien-text:hover {\n      color: #83a7b7; }\n  .main-panel .head1 {\n    font-style: italic;\n    font-size: 20px; }\n  .main-panel .head2 {\n    font-style: italic;\n    font-size: 16px;\n    border-left: 2px solid #72d1db;\n    margin-left: 12px;\n    padding: 6px 16px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -1335,7 +1351,7 @@ if(false) {
 }
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -1361,13 +1377,39 @@ if(false) {
 }
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
 var content = __webpack_require__(19);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../../../../coblan/webcode/node_modules/css-loader/index.js!../../../../../../../coblan/webcode/node_modules/sass-loader/lib/loader.js!./chuzhi.scss", function() {
+			var newContent = require("!!../../../../../../../coblan/webcode/node_modules/css-loader/index.js!../../../../../../../coblan/webcode/node_modules/sass-loader/lib/loader.js!./chuzhi.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(20);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -1387,13 +1429,13 @@ if(false) {
 }
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(21);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -1413,13 +1455,13 @@ if(false) {
 }
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(21);
+var content = __webpack_require__(22);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -1439,7 +1481,7 @@ if(false) {
 }
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

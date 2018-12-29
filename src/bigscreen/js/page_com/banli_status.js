@@ -12,7 +12,7 @@ Vue.component('com-banli-status',{
     },
     template:`<div class="com-banli-status">
         <div class="scien-text head2">办理情况</div>
-        <div style="padding: 10px 15px;">
+        <div style="padding: 40px 30px;">
             <div class="item">
               <div class="scien-text">受理数</div>
               <div class="number" v-text="row.shouli_number">22</div>
