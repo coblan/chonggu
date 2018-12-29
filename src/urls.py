@@ -39,7 +39,7 @@ urlpatterns = [
     
     
     url(r'^pc/([\w\.]+)/?$',PcMenu.as_view(),name=PcMenu.url_name),
-    url(r'^pc/([\w\.]+)/?$',RedirectView.as_view(url='/pc/inspector.inspector'),
+    url(r'^pc/?$',RedirectView.as_view(url='/pc/inspector.inspector')),
     
     url(r'^pg/([\w\.]+)/?$',ProgramerMenu.as_view(),name=ProgramerMenu.url_name),
     url(r'^pg/',RedirectView.as_view(url='/pg/kv')),
