@@ -13,6 +13,7 @@ class PcMenu(BaseEngine):
     title ='重固'
     mini_brand='CG'
     menu=[
+        {'label':'大屏主页','url':'/cg','icon':fa('fa-tv')},
         {'label':'监督员','url':page('inspector.inspector'),'icon':fa('fa-user-secret'),
          'submenu':[
              {'label':'实时点位','url':page('inspector.inspector_map')},
